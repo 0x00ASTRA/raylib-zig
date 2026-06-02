@@ -17,6 +17,7 @@ pub extern "c" fn GuiSetStyle(control: rgui.Control, property: c_int, value: c_i
 pub extern "c" fn GuiGetStyle(control: rgui.Control, property: c_int) c_int;
 pub extern "c" fn GuiLoadStyle(fileName: [*c]const u8) void;
 pub extern "c" fn GuiLoadStyleDefault() void;
+pub extern "c" fn GuiLoadStyleFromMemory(fileData: [*c]const u8, dataSize: usize) void;
 pub extern "c" fn GuiEnableTooltip() void;
 pub extern "c" fn GuiDisableTooltip() void;
 pub extern "c" fn GuiSetTooltip(tooltip: [*c]const u8) void;

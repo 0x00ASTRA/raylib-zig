@@ -9,7 +9,7 @@ test {
     std.testing.refAllDecls(rl);
 }
 
-pub const RayguiError = error{GetIcons};
+pub const RayguiError = error{ GetIcons, LoadStyle };
 
 const Vector2 = rl.Vector2;
 const Vector3 = rl.Vector3;
@@ -581,6 +581,15 @@ pub fn loadStyle(fileName: [:0]const u8) void {
 /// Load style default over global style
 pub fn loadStyleDefault() void {
     cdef.GuiLoadStyleDefault();
+}
+
+/// Load style file data over global style variable (.rgs)
+pub fn loadStyleFromMemory(fileData: ?[:0]const u8) RayguiError!void {
+    if (fileData) |fd| {
+        cdef.GuiLoadStyleFromMemory(@as([*c]const u8, @ptrCast(fd)), fd.len);
+        return;
+    }
+    return RayguiError.LoadStyle;
 }
 
 /// Enable gui tooltips (global state)
